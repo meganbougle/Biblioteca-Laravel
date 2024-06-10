@@ -31,6 +31,12 @@ class CareerController extends Controller
     public function store(Request $request)
     {
         //
+        $career= new Career();
+        $career->codigo = $request->codigo;
+        $career->nombre = $request->nombre;
+        $career->descripcion = $request->descripcion;
+        $career->save();
+        return redirect()->route('careers.index');
     }
 
     /**
@@ -39,6 +45,8 @@ class CareerController extends Controller
     public function show(string $id)
     {
         //
+        $career = Career::find($id);
+        return view('careers.show', compact('career'));
     }
 
     /**
@@ -47,6 +55,8 @@ class CareerController extends Controller
     public function edit(string $id)
     {
         //
+        $career = Career::find($id);
+        return view('careers.edit', compact('career'));
     }
 
     /**
@@ -55,6 +65,12 @@ class CareerController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $career = Career::find($id);
+        $career->codigo = $request->codigo;
+        $career->nombre = $request->nombre;
+        $career->descripcion = $request->descripcion;
+        $career->save();
+        return redirect()->route('careers.index');
     }
 
     /**
@@ -63,5 +79,8 @@ class CareerController extends Controller
     public function destroy(string $id)
     {
         //
+        $career = Career::find($id);
+        $career->delete();
+        return redirect()->route('careers.index');
     }
 }
